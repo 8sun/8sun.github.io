@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="{{description}}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="{{path}}/assets/css/styles.css">
+</head>
+<body>
+<header class="top-banner">
+    <p><a href="https://github.com/8sun/static-site-gen">[Powered by 8sun]</a></p>
+</header>
+<header class="main-header page-header">
+    <div class="logo">
+        <h1>{{page_title}}</h1>
+        <p>{{page_description}}</p>
+    </div>
+    <nav>
+        {{menu}}
+    </nav>
+</header>
+<main>
+    <section class="intro">
+        {{content}}
+        <div class="buttons">
+            <a href="{{path}}/contact.html" class="button primary">Написать мне</a>
+            <a href="{{path}}/about.html" class="button secondary">Об авторе</a>
+        </div>
+        <p class="footer-note">I have my blog here: <a href="#">My page</a></p>
+    </section>
+</main>
+<script src="{{path}}/assets/js/highlight-category.js"></script>
+</body>
+</html>

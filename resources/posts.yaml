@@ -1,0 +1,67 @@
+- id: shambala
+  title: "Шамбала"
+  description: "Шевелящаяся истома заполнила непостижимые глубины моего исковерканного сознания..."
+  template: "post.html"
+  icon: "shambala.png"
+  categories:
+    stories: "Проза"
+  home: true
+  date: "2022-09-04"
+
+- id: inspiration
+  title: "Вдохновение"
+  description: "Вдохновение, стихотворение"
+  template: "post.html"
+  icon: ""
+  categories:
+    poetry: "Поэзия"
+  home: true
+  date: "2024-03-24"
+
+- id: fanfaron
+  title: "Фанфарон"
+  description: "Фанфарон, стихотворение"
+  template: "post.html"
+  icon: ""
+  categories:
+    poetry: "Поэзия"
+  home: true
+  date: "2024-03-24"
+
+- id: richter
+  title: "Рихтер"
+  description: "Рассказ о человеческой природе"
+  template: "post.html"
+  icon: "richter1.png"
+  categories:
+    stories: "Проза"
+  home: true
+  date: "2022-12-18"
+
+- id: what_the_hell_are_the_requirements
+  title: "Какие еще к черту требования?"
+  description: "Статья о требованиях в программной инженерии"
+  template: "post.html"
+  icon: "requirements.png"
+  categories:
+    dev: "Dev"
+  home: true
+  date: "2024-02-12"
+
+- id: about
+  title: "Об авторе"
+  description: "Немного обо мне и моих проектах"
+  template: "page.html"
+  icon: ""
+  categories:
+  home: false
+  date: "2021-01-01"
+
+- id: contact
+  title: "Связаться со мной"
+  description: "Ссылки на социальные сети и электронную почту"
+  template: "page.html"
+  icon: ""
+  categories:
+  home: false
+  date: "2021-01-01"
