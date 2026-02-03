@@ -64,7 +64,7 @@
   template: "post.html"
   icon: ""
   categories:
-    stories: "Наблюдения"
+    discoveries: "Наблюдения"
   home: true
   date: "2023-09-23"
 
