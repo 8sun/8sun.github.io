@@ -22,6 +22,7 @@ jobs:
           rm -rf docs
           mkdir -p docs
           rsync -a --delete site/ docs/
+          mv google*.html docs/
 
       - name: Commit docs (if changed)
         run: |
