@@ -50,13 +50,23 @@
 
 - id: karlik
   title: "Мастер"
-  description: "Кто он Кыштымский дьявол"
+  description: "Кто он Кыштымский дьявол?"
   template: "post.html"
   icon: ""
   categories:
     stories: "Проза"
   home: true
   date: "2023-11-25"
+
+- id: reka
+  title: "Река"
+  description: "У них были разные представления о том, что такое любовь"
+  template: "post.html"
+  icon: ""
+  categories:
+    stories: "Проза"
+  home: true
+  date: "2023-01-24"
 
 - id: un
   title: "ООН"
