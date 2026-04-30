@@ -130,7 +130,7 @@
 
 - id: unemployed
   title: "Безработный"
-  description: "Средоточие непосильного бремени отчужденности и оцепенения"
+  description: "Безработный, стихотворение"
   template: "post.html"
   icon: ""
   categories:
