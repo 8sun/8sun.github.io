@@ -74,9 +74,69 @@
   template: "post.html"
   icon: ""
   categories:
-    discoveries: "Наблюдения"
+    view: "Взгляд"
   home: true
   date: "2023-09-23"
+
+- id: ny_day1
+  title: "Манхэттен, Мидтаун"
+  description: "New York City. День первый. Глазированный творог и кофе"
+  template: "post.html"
+  icon: ""
+  categories:
+    view: "Взгляд"
+  home: true
+  date: "2025-11-17"
+
+- id: ny_day2
+  title: "Бруклин и Даунтаун"
+  description: "New York City. День второй. Лоск браунстоунов и неистовство корпораций"
+  template: "post.html"
+  icon: ""
+  categories:
+    view: "Взгляд"
+  home: true
+  date: "2026-01-10"
+
+- id: ny_day3
+  title: "Бронкс"
+  description: "New York City. День третий. Через отвращение к трогательным воспоминаниям."
+  template: "post.html"
+  icon: ""
+  categories:
+    view: "Взгляд"
+  home: true
+  date: "2026-02-01"
+
+- id: ny_day4
+  title: "Манхэттен"
+  description: "New York City. День четвертый. Манхэттен"
+  template: "post.html"
+  icon: ""
+  categories:
+    view: "Взгляд"
+  home: true
+  date: "2026-02-08"
+
+- id: under_bucket
+  title: "Под ковшом"
+  description: "Средоточие непосильного бремени отчужденности и оцепенения"
+  template: "post.html"
+  icon: ""
+  categories:
+    stories: "Проза"
+  home: true
+  date: "2022-11-08"
+
+- id: unemployed
+  title: "Под ковшом"
+  description: "Средоточие непосильного бремени отчужденности и оцепенения"
+  template: "post.html"
+  icon: ""
+  categories:
+    poetry: "Поэзия"
+  home: true
+  date: "2022-08-05"
 
 - id: about
   title: "Об авторе"
