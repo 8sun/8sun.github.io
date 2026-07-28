@@ -128,6 +128,16 @@
   home: true
   date: "2022-11-08"
 
+- id: automated_future
+  title: "Автоматизированное будущее"
+  description: "Многоярусные мосты корежили пространство невдалеке и походили на скелеты обрюзгших и сломанных механизмов, застывших в судорожном бессилии"
+  template: "post.html"
+  icon: ""
+  categories:
+    stories: "Проза"
+  home: true
+  date: "2026-07-28"
+
 - id: unemployed
   title: "Безработный"
   description: "Безработный, стихотворение"
