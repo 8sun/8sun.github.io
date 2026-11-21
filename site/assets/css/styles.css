@@ -404,3 +404,12 @@ main {
     filter: brightness(1);
     z-index: -2;
 }
+body:has(.full-width-illustration) {
+    container-type: inline-size;
+}
+
+.intro img.full-width-illustration {
+    width: 100cqw;
+    max-width: none;
+    margin-inline: calc(50% - 50cqw);
+}

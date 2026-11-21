@@ -148,6 +148,16 @@
   home: true
   date: "2022-08-05"
 
+- id: utro_posle_buri
+  title: "Утро после бури"
+  description: "Во сне затяжка кальяном переносит меня на Андреевский спуск, а в пустом кафе на спинке стула висит серебряная мантия."
+  template: "post.html"
+  icon: "utro_posle_buri.jpg"
+  categories:
+    stories: "Проза"
+  home: true
+  date: "2022-09-30"
+
 - id: about
   title: "Об авторе"
   description: "Немного обо мне и моих проектах"
