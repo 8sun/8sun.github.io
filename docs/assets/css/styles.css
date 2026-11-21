@@ -34,6 +34,7 @@ body {
 .top-banner p { margin: 0; color: var(--main-text); }
 
 .main-header {
+    isolation: isolate;
     position: relative;
     height: 60vh;
     display: flex;
@@ -397,10 +398,6 @@ main {
     overflow: hidden;
     padding: 40px 16px;
 }
-.page-header::before {
-    content: "";
-    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-    background: var(--main-text);
-    filter: brightness(1);
-    z-index: -2;
+.intro img.full-width-illustration {
+    width: 100%;
 }
