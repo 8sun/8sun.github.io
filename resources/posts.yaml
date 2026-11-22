@@ -128,16 +128,6 @@
   home: true
   date: "2022-11-08"
 
-- id: automated_future
-  title: "Автоматизированное будущее"
-  description: "Многоярусные мосты корежили пространство невдалеке и походили на скелеты обрюзгших и сломанных механизмов, застывших в судорожном бессилии"
-  template: "post.html"
-  icon: ""
-  categories:
-    stories: "Проза"
-  home: true
-  date: "2026-07-28"
-
 - id: unemployed
   title: "Безработный"
   description: "Безработный, стихотворение"
@@ -157,6 +147,26 @@
     stories: "Проза"
   home: true
   date: "2022-09-30"
+
+- id: do_nas_ili_posle
+  title: "До нас… или после"
+  description: "Через какое-то время среди серых плит и ржавых линий горизонта проступил вход в стационарный рефрижератор — массивный, как гроб для вселенной."
+  template: "post.html"
+  icon: "do_nas_ili_posle.jpg"
+  categories:
+    stories: "Проза"
+  home: true
+  date: "2026-11-22"
+
+- id: vopreki_ne_radi
+  title: "Вопреки, не ради"
+  description: "Стихотворение о пути в Каракорум и о том, что ведёт к вершине."
+  template: "post.html"
+  icon: ""
+  categories:
+    poetry: "Поэзия"
+  home: true
+  date: "2026-11-22"
 
 - id: about
   title: "Об авторе"
