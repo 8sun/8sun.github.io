@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Используем написанную на Rust динамическую библиотеку в Node.js | Бодхисаттва в сети</title>
+    <meta name="description" content="Используем Rust динамическую библиотеку в Node.js.">
+    <link rel="canonical" href="https://8sun.github.io/ispol_zuyem_napisannuyu_na_rust_dinamicheskuyu_biblioteku_v_node_js.html">
+    <meta property="og:title" content="Используем написанную на Rust динамическую библиотеку в Node.js">
+    <meta property="og:description" content="Используем Rust динамическую библиотеку в Node.js.">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Бодхисаттва в сети">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://8sun.github.io/assets/img/no-image.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Используем написанную на Rust динамическую библиотеку в Node.js">
+    <meta name="twitter:description" content="Используем Rust динамическую библиотеку в Node.js.">
+    <meta name="twitter:image" content="https://8sun.github.io/assets/img/no-image.png">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+</head>
+<body>
+<header class="top-banner">
+    <p><a href="https://github.com/8sun/static-site-gen">[Powered by 8sun]</a></p>
+</header>
+<header class="main-header page-header">
+    <div class="logo">
+        <h1>Используем написанную на Rust динамическую библиотеку в Node.js</h1>
+        <p>Используем Rust динамическую библиотеку в Node.js.</p>
+    </div>
+    <nav>
+        <a class="meny_item" href="index.html">Дом</a><a class="meny_item" href="dev.html">Dev</a><a class="meny_item" href="view.html">Взгляд</a><a class="meny_item" href="poetry.html">Поэзия</a><a class="meny_item" href="stories.html">Проза</a>
+    </nav>
+</header>
+<main>
+    <section class="intro">
+        <p><img src="assets/img/blogger/noderust.jpg" alt="" /> Возьмем гипотетическую задачу: у нас есть рабочий проект на <strong>Node.js</strong> и мы хотим оптимизировать работу некой функции, производящей сложные вычисления. Принято решение сделать это с помощью <strong>Rust</strong> - низкоуровневого языка программирования, который справляется с той же задачей гораздо быстрее.</p>
+<p>Разные подходы могут быть задействованы для решения этой задачи (динамические библиотеки, C++ аддоны Node.js и др).</p>
+<p>В данной статье я хочу рассмотреть использование FFI [1] (Foreign Function Interface) и C-совместимой библиотеки написанной на Rust [2]. Этот способ не является самым эффективным по производительности, но тем не менее, может дать неплохой прирост с точки зрения оптимизации.</p>
+<p>Приведенный здесь пример, однако, служит лишь для демонстрации того, как можно организовать взаимодействие Node.js и Rust, к самой описанной выше задаче он отношения не имеет.</p>
+<h2>Часть первая: <em>Обмен строками</em></h2>
+<p><em>Задача: произвести обмен строками между Rust-библиотекой и Node.js, чтобы проиллюстрировать взаимодействие.</em></p>
+<h1>Часть вторая: <em>Структуры</em></h1>
+<p><em>Задача: использовать структуры, для обмена данными и результатом между библиотекой и Node.js</em></p>
+<blockquote>
+<p><em>В финальном примере я решил объеденить эти две части в одну.</em></p>
+</blockquote>
+<h2>Node.js</h2>
+<p><em><strong>В настоящий момент работает только для версии 16.18.1</strong></em></p>
+<p>Напишем сценарий для Node.js, который обращается к динамической библиотеке и вызывает ее функции с передачей параметров и выводом возвращаемых значений.</p>
+<p>В качестве зависимостей мы будем использовать:</p>
+<ul>
+<li>ffi-napi - Foreign function interface, расширение для загрузки и вызова динамических библиотек</li>
+<li>ref-napi - дополнительная зависимость, который поможет нам работать с некоторыми C-подобными типами в JavaScript</li>
+<li>ref-struct-napi - предлагает реализацию типа Struct для Node.js</li>
+</ul>
+<p>Рассмотрим полный листинг index.js</p>
+<p><a href="https://gist.github.com/Mefistophell/48d621098d3e79d3119eca0cf80ad6b7">GitHub Gist</a></p>
+<p>Несмотря на то, что код достаточно легко читаем, некоторые строки все же требуют пояснений.</p>
+<p><strong>*7</strong> Для того, чтобы производить обмен данными с динамической библиотекой, мы должны вооружиться специальными типами, которые эта библиотека будет понимать. Мы не можем использовать JS массив и вместо этого мы будем работать с указателями (Pointer [3]). Для этого нам потребутся модуль (C++ addon) <a href="http://tootallnate.github.io/ref/">ref</a> (который среди прочего позволяет создавать свои собственные типы), а так же модули реализующие типы <a href="https://github.com/TooTallNate/ref-struct">структура</a> и <a href="https://github.com/TooTallNate/ref-array">массив</a>. В этой строке мы создаем C-подобный тип массива размером в 2 элемента, который будет содержать значения типа int64.</p>
+<p>*10 Поскольку функция multiply библиотеки будет возвращать структуру (struct), представление которой в JavaScript отсутствует, нам потребуется модуль <a href="https://github.com/TooTallNate/ref-struct">ref-struct</a>, позволяющий работать с этим типом данных и, в частности, преобразовать его в объект JavaScript. В этом месте сценария мы создаем структуру OutputType, (подобно Rust или C) с тремя полями типов: int64,OutputArrayType,CString. Последний тип представляет собой так называемую <em>Нуль-терминированную строку</em> (NULL-terminated C-style strings). Такой строкой мы сможем пользоваться в библиотеке.</p>
+<p>*24 Для инициализации доступа к функциям библиотеки мы используем вызов ffi.Library, который имеет следующую сигнатуру:</p>
+<pre><code>ffi.Library(путь_к_библиотеке, { имя_функции: [ возвращаемый_тип, [ тип_аргумента_1, тип_аргумента_2, ... ], ... ]);
+</code></pre>
+<p>Возвращаемый тип для функции multiply - созданная нами ранее структура OutputType. Аргументом функции является другая структура.</p>
+<p>Вы могли заметить, что возвращаемый тип и тип аргумента функции hello есть простая строка string. Это то же самое что и ref.types.CString, никакой проблемы здесь нет, я сделал это нарочно, для демонстрации. Модуль <a href="http://tootallnate.github.io/ref/">ref</a> позволяет вам использовать “string” и “number”. Для подробностей, смотрите справку к модулю.</p>
+<p>*35 Вызываем функцию hello библиотеки, как обычный метод объекта JavaScript.</p>
+<p>*41 Создаем структуру с данными. Обратите внимание что свойство result я намеренно опускаю.</p>
+<p>*46 Обращаемся к свойству структуры, так же как мы делаем с обычными объектами JS.</p>
+<p>*47 Преобразовываем к обычному массиву.</p>
+<p>*51 Поскольку мы не можем работать со структурами в Node.js, используя его нативные возможности, мы преобразуем ее в объект. (Заметьте, мы всегда можем обратиться напрямую к полям структуры, используя нотацию доступа к свойствам объектов JavaScript).</p>
+<h2>Rust</h2>
+<p>Теперь разберем полный листинг кода библиотеки</p>
+<p><a href="https://gist.github.com/Mefistophell/74d3bdc9ee3d051294f97f19f1b53476">GitHub Gist</a></p>
+<h4>Начнем с функции hello.</h4>
+<p>*1, *3-5 Для работы с С-типами нам потребуются некоторые зависимости.</p>
+<p>*7, *56 Аннотация, указывающая компилятору Rust не искажать имя этой функции.</p>
+<p>В процессе создания библиотеки Rust, в скомпилированном файле происходит изменение имени функции (техника называемая mangling [4]). Для того, чтобы функцию можно было вызвать из других языков, мы должны отключить такое поведение.</p>
+<p>*8 Эта аннотация добавлена мной чтобы линтер clippy не вызывал ошибку о небезопасной функции.</p>
+<p>*10 Функция объявляется как публичная - pub (может быть вызвана за пределами этого модуля), а ключевое слово extern обозначет что мы собираемся работать с FFI, то есть вызывать ее из другого языка. “C” говорит о том, какой двоичный интерфейс приложения (ABI) будет использоваться. ABI определяет, как вызывать функцию на уровне сборки. В данном случает это C.</p>
+<p>Функция принимает и возвращает значения типа *const c_char</p>
+<p>*const Т - тип “указатель” (raw pointer [5]). c_char - эквивалент типа char в языке С [6]</p>
+<p>*14 Так как на вход функции мы получаем указатель, а работать мы хотим со строкой, то нам нужно выполнить небезопасный (по ряду причин, например из-за отсутствия гарантии валидности) метод from_ptr, который принимает указатель и возвращает представление заимствованной строки C ( &amp;’a CStr). Эта структура позволяет нам использовать полезные методы. Поскольку функция небезопасная мы оборачиваем ее в блок unsafe *11</p>
+<p>*17 Используем метод to_str() чтобы получить срез строки</p>
+<p>*22 Возвращаем новую строку как указатель с типом c_char</p>
+<h4>Теперь рассмотрим функцию multiply и связанные с ней структуры</h4>
+<p>*25, *43 Аннотация #[repr(C)] перед описанием структуры Output, сообщает компилятору, что данный тип должен быть С-совместимым (с-representation) [7]</p>
+<p>*29, *38 Текстовые данные мы возвращаем как тип <strong>указатель</strong></p>
+<h4>Cargo.toml для библиотеки</h4>
+<p>Чтобы скомпилировать библиотеку нам нужно будет добавить следующие строки к Cargo.toml файлу:</p>
+<p>[dependencies]<br />
+libc = “*”</p>
+<p>[lib]<br />
+name = “_node_rust”<br />
+path = “src/lib.rs”<br />
+crate-type = [“dylib”]</p>
+<p>Эти директивы говорят компилятору, что нам нужно получить динамическую библиотеку, здесь мы указываем путь к исходному файлу и название.</p>
+<p>Теперь можно скомпилировать библиотеку cargo build –release и запустить node index.js</p>
+<p>Как видно из примера мы можем довольно удобно использовать функции динамической библиотеки в Node.js, передавать в нее данные и возвращать результаты. Это может быть использованно для решения задачи, о которой я говорил в самом начале. Так что если вам нравиться JavaScript и Rust, то хорошо иметь ввиду такую возможность.</p>
+<p>Но лучший способ понять принцип это его испробовать.<br />
+По этой <a href="https://github.com/Mefistophell/node-rust-ffi">ссылке</a> вы найдте репозиторий описанного примера и инструкцию по установке. Удачи!</p>
+<p>Ссылки:</p>
+<p>[1]. <a href="http://wiki.c2.com/?ForeignFunctionInterface">Foreign Function Interface</a><br />
+[2]. <a href="https://doc.rust-lang.org/1.2.0/book/rust-inside-other-languages.html">Статья: Rust Inside Other Languages</a><br />
+[3]. <a href="http://www.onlinecomputerteacher.net/pointers-in-c.html">Pointers in C programming language</a><br />
+[4]. <a href="https://en.wikipedia.org/wiki/Name_mangling">Name mangling (Wikipedia)</a><br />
+[5]. <a href="https://doc.rust-lang.org/std/primitive.pointer.html">Type: std/pointer</a><br />
+[6]. <a href="https://doc.rust-lang.org/std/os/raw/type.c_char.html">Type: std/c_char</a><br />
+[7]. <a href="https://doc.rust-lang.org/reference/type-layout.html#the-c-representation">Type layout: c-representation</a></p>
+
+        <p class="footer-note">Разделы: <a href="dev.html" class="category-link">Dev</a></p>
+        <p class="footer-note">2020-09-29</p>
+        <div class="buttons">
+            <a href="./contact.html" class="button primary">Написать мне</a>
+            <a href="./about.html" class="button secondary">Об авторе</a>
+        </div>
+    </section>
+</main>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Используем написанную на Rust динамическую библиотеку в Node.js","description":"Используем Rust динамическую библиотеку в Node.js.","datePublished":"2020-09-29","mainEntityOfPage":"https://8sun.github.io/ispol_zuyem_napisannuyu_na_rust_dinamicheskuyu_biblioteku_v_node_js.html","author":{"@type":"Person","name":"Бодхисаттва в сети"}}</script>
+<script src="./assets/js/highlight-category.js"></script>
+</body>
+</html>

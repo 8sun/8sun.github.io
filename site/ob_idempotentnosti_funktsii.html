@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Об идемпотентности функции | Бодхисаттва в сети</title>
+    <meta name="description" content="В этом материале мы, в качестве одного из фундаментальных требований к построению современных облачных функций, рассмотрим понятие…">
+    <link rel="canonical" href="https://8sun.github.io/ob_idempotentnosti_funktsii.html">
+    <meta property="og:title" content="Об идемпотентности функции">
+    <meta property="og:description" content="В этом материале мы, в качестве одного из фундаментальных требований к построению современных облачных функций, рассмотрим понятие…">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Бодхисаттва в сети">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://8sun.github.io/assets/img/no-image.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Об идемпотентности функции">
+    <meta name="twitter:description" content="В этом материале мы, в качестве одного из фундаментальных требований к построению современных облачных функций, рассмотрим понятие…">
+    <meta name="twitter:image" content="https://8sun.github.io/assets/img/no-image.png">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+</head>
+<body>
+<header class="top-banner">
+    <p><a href="https://github.com/8sun/static-site-gen">[Powered by 8sun]</a></p>
+</header>
+<header class="main-header page-header">
+    <div class="logo">
+        <h1>Об идемпотентности функции</h1>
+        <p>В этом материале мы, в качестве одного из фундаментальных требований к построению современных облачных функций, рассмотрим понятие…</p>
+    </div>
+    <nav>
+        <a class="meny_item" href="index.html">Дом</a><a class="meny_item" href="dev.html">Dev</a><a class="meny_item" href="view.html">Взгляд</a><a class="meny_item" href="poetry.html">Поэзия</a><a class="meny_item" href="stories.html">Проза</a>
+    </nav>
+</header>
+<main>
+    <section class="intro">
+        <p>В этом материале мы, в качестве одного из фундаментальных требований к построению современных облачных функций, рассмотрим понятие идемпотентности.</p>
+<p><strong>Идемпотентность</strong> является свойством определенных операций в математике и информатике, посредством которого обеспечивается неизменность результа при множественном применении этой операции.</p>
+<p>Концепция идемпотентности возникает в ряде мест в линейной и абстрактной алгебре, а также в функциональном программировании (в котором оно связано со свойством ссылочной прозрачности - чистыми функциями)</p>
+<p>Стоит упомянуть, что чистая функция - это детерминированная* функция не вызывающая побочных эффектов**.</p>
+<p>* функция является детерминированной если для одного и того же набора входных значений она возвращает одинаковый результат<br />
+** функции с побочными эффектами модифицируют значения глобальных или внешних, (т.е. не из их лексического окружения) переменных или осуществляют операции ввода-вывода, либо же зависит от внешних обработчиков</p>
+<p>Идемпотентный вызов функции — это операция, многократное повторение которой эквивалентно однократному.</p>
+<h3>Способы достижения идемпотентности облачной функции</h3>
+<p>Фоновые функции, которые открыты для механизма повторения, должны быть идемпотентными. Вот несколько общих рекомендаций по созданию идемпотентной фоновой функции:</p>
+<ul>
+<li>
+<p>Многие внешние API (такие как Stripe) позволяют указывать ключ идемпотентности в качестве параметра. Если вы используете такой API, вы должны использовать идентификатор события в качестве ключа идемпотентности.</p>
+</li>
+<li>
+<p>Идемпотентность хорошо работает с at-least-once delivery*, потому что она делает повторную попытку безопасной. Таким образом, в большинстве случаев лучшей практикой для написания надежного кода будет комбинация идемпотентности с операцией обеспечивающей повторные попытки при отказе.</p>
+</li>
+<li>
+<p>Убедитесь, что ваш код внутренне идемпотентен. Например:</p>
+<ul>
+<li>убедитесь, что мутации могут произойти более одного раза без изменения результата</li>
+<li>Запросите состояние базы данных в транзакции перед модификацией данных</li>
+<li>убедитесь, что все побочные эффекты также идемпотентны</li>
+</ul>
+</li>
+<li>
+<p>Гарантируйте транзакционную проверку вне функции, независимо от кода. Например, сохраняйте состояние где-то указывая, что данный идентификатор события уже обработан</p>
+</li>
+<li>
+<p>Рассмотрите работу с дублирующимися вызовами функций вне диапазона. Например, это может быть отдельный процесс, который производит очистку после повторных вызовов функций</p>
+</li>
+</ul>
+<p>* Паттерн согласно которому в случае сбоев, приводящих к потере сообщений или занимающих слишком много времени на восстановление от них, сообщения передаются повторно, чтобы обеспечить их доставку хотя бы единожды</p>
+<p>Ссылки:<br />
+<a href="https://cloud.google.com/functions/docs/bestpractices/retries#make_retryable_background_functions_idempotent">Make retryable background functions idempotent</a></p>
+<p><a href="http://www.cloudcomputingpatterns.org/at_least_once_delivery/">Patterns: At-least-once Delivery</a></p>
+
+        <p class="footer-note">Разделы: <a href="dev.html" class="category-link">Dev</a></p>
+        <p class="footer-note">2020-02-03</p>
+        <div class="buttons">
+            <a href="./contact.html" class="button primary">Написать мне</a>
+            <a href="./about.html" class="button secondary">Об авторе</a>
+        </div>
+    </section>
+</main>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Об идемпотентности функции","description":"В этом материале мы, в качестве одного из фундаментальных требований к построению современных облачных функций, рассмотрим понятие…","datePublished":"2020-02-03","mainEntityOfPage":"https://8sun.github.io/ob_idempotentnosti_funktsii.html","author":{"@type":"Person","name":"Бодхисаттва в сети"}}</script>
+<script src="./assets/js/highlight-category.js"></script>
+</body>
+</html>

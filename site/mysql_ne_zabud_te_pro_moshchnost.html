@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MySQL. Не забудьте про мощность. | Бодхисаттва в сети</title>
+    <meta name="description" content="Однажды, с целью оптимизации некоего типового запроса, мы добавили к таблице, содержащей миллионы строк, простой B-tree индекс по…">
+    <link rel="canonical" href="https://8sun.github.io/mysql_ne_zabud_te_pro_moshchnost.html">
+    <meta property="og:title" content="MySQL. Не забудьте про мощность.">
+    <meta property="og:description" content="Однажды, с целью оптимизации некоего типового запроса, мы добавили к таблице, содержащей миллионы строк, простой B-tree индекс по…">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Бодхисаттва в сети">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://8sun.github.io/assets/img/no-image.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MySQL. Не забудьте про мощность.">
+    <meta name="twitter:description" content="Однажды, с целью оптимизации некоего типового запроса, мы добавили к таблице, содержащей миллионы строк, простой B-tree индекс по…">
+    <meta name="twitter:image" content="https://8sun.github.io/assets/img/no-image.png">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+</head>
+<body>
+<header class="top-banner">
+    <p><a href="https://github.com/8sun/static-site-gen">[Powered by 8sun]</a></p>
+</header>
+<header class="main-header page-header">
+    <div class="logo">
+        <h1>MySQL. Не забудьте про мощность.</h1>
+        <p>Однажды, с целью оптимизации некоего типового запроса, мы добавили к таблице, содержащей миллионы строк, простой B-tree индекс по…</p>
+    </div>
+    <nav>
+        <a class="meny_item" href="index.html">Дом</a><a class="meny_item" href="dev.html">Dev</a><a class="meny_item" href="view.html">Взгляд</a><a class="meny_item" href="poetry.html">Поэзия</a><a class="meny_item" href="stories.html">Проза</a>
+    </nav>
+</header>
+<main>
+    <section class="intro">
+        <p>Однажды, с целью оптимизации некоего типового запроса, мы добавили к таблице, содержащей миллионы строк, простой B-tree индекс по интересующей нас колонке. К нашему стыду, мы не удосужились взглянуть на план запроса оптимизатора, для чего достаточно было бы вызвать EXPLAIN, и в наивной уверенности, что дело сделано, продолжили работу над другими сущностями имеющими проблемы с производительностью.</p>
+<p>Через какое-то время, мы обнаружили, что дела идут не столь гладко, как мы себе представляли. Изыскания привели нас к ранее существующей проблеме. Тот же запрос, который мы недавно с такой легкостью оптимизировали, проявлял необузданную мешковатость. Выяснилось, однако, что наше воздействие на него безотказным индексом совершенно не повлияло на производительность. Напротив, ситуация значительно ухудшилась.</p>
+<p>Ранее, в этом запросе, мы использовали проиндексированные текстовые поля для объединения таблиц. Теперь же мы связали их: с одной стороны целочисленным первичным ключом, а с другой — полем, репрезентирующим этот ключ в целевой таблице. Именно по этому полю был построен коварный индекс.</p>
+<p>Взглянув, наконец, на план запроса мы сильно удивились — вместо соединения по индексу, таблицу ждало полное сканирование. Как же так?</p>
+<p>Дело в мощности! <strong>Cardinality</strong> (мощность множества) — число определяющее количество уникальных значений в индексе. Оно рассчитывается на основе статистики и не обязательно является точным, даже для небольших таблиц. Чем выше мощность, тем больше вероятность того, что MySQL использует индекс при объединении. Это свойство можно найти просмотрев статистику по индексам (SHOW INDEX FROM <em><strong>table_name</strong></em>)</p>
+<p>Но что не так с мощностью? Все хорошо, покуда статистика обновляется. Но, операции обновления статистики, например ANALYZE TABLE, блокируют таблицу на которой они применяются и поэтому такие процедуры в рабочей БД крайне нежелательны.</p>
+<p>В нашем случае, мы совершенно забыли про простое правило — если был применен ALTER TABLE на таблице имеющей множество записей, то стоит обновить статистику вызвав ANALYZE TABLE. Об этом свидетельствует официальная документация:</p>
+<p><em>After an ALTER TABLE statement, it may be necessary to run ANALYZE TABLE to update index cardinality information</em></p>
+<p><strong>Выводы:</strong></p>
+<p>- не забывать использовать EXPLAIN, чтобы удостовериться в корректности работы запросов после оптимизаций;</p>
+<ul>
+<li>помнить, что после изменения схемы может быть необходимо обновить статистику.</li>
+</ul>
+<p><strong>Ссылки:</strong></p>
+<p><a href="https://dev.mysql.com/doc/refman/5.7/en/alter-table.html%20">https://dev.mysql.com/doc/refman/5.7/en/alter-table.html</a></p>
+<p><a href="https://dev.mysql.com/doc/refman/5.7/en/show-index.html">https://dev.mysql.com/doc/refman/5.7/en/show-index.html</a></p>
+<p><a href="https://logicalread.com/mysql-index-cardinality-mc12/#.YWxCtxBBwRQ">https://logicalread.com/mysql-index-cardinality-mc12/#.YWxCtxBBwRQ</a></p>
+
+        <p class="footer-note">Разделы: <a href="dev.html" class="category-link">Dev</a></p>
+        <p class="footer-note">2021-11-12</p>
+        <div class="buttons">
+            <a href="./contact.html" class="button primary">Написать мне</a>
+            <a href="./about.html" class="button secondary">Об авторе</a>
+        </div>
+    </section>
+</main>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"MySQL. Не забудьте про мощность.","description":"Однажды, с целью оптимизации некоего типового запроса, мы добавили к таблице, содержащей миллионы строк, простой B-tree индекс по…","datePublished":"2021-11-12","mainEntityOfPage":"https://8sun.github.io/mysql_ne_zabud_te_pro_moshchnost.html","author":{"@type":"Person","name":"Бодхисаттва в сети"}}</script>
+<script src="./assets/js/highlight-category.js"></script>
+</body>
+</html>

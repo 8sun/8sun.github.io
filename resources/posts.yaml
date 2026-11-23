@@ -168,6 +168,606 @@
   home: true
   date: "2026-11-22"
 
+- id: myunkhen
+  title: "Мюнхен"
+  description: "ЕС чрезвычайно озабочен увеличением цены на газ. Что будет, если Россия вдруг сократит поставки, как они это делали и цена еще…"
+  template: "post.html"
+  icon: ""
+  categories:
+    view: "Взгляд"
+  home: false
+  date: "2022-12-04"
+
+- id: we_shall_never_surrender
+  title: "We shall never surrender!"
+  description: "\"We will fight! We shall never surrender! ... But we need your help. We need your weapons, we'll handle the rest\". Я не эксперт по…"
+  template: "post.html"
+  icon: ""
+  categories:
+    view: "Взгляд"
+  home: false
+  date: "2022-11-26"
+
+- id: vy_nedostatochno_motivirovany
+  title: "Вы недостаточно мотивированы!"
+  description: "Знаете в чем ваша проблема? Почему вы недовольны? Почему вами недовольны? Все дело в том, что вы плохо мотивированы"
+  template: "post.html"
+  icon: ""
+  categories:
+    view: "Взгляд"
+  home: false
+  date: "2022-07-27"
+
+- id: takova_moya_rabota
+  title: "Такова моя работа"
+  description: "Это моя работа и другую мне не сыскать. И хотя время от времени мне приходится говорить людям неприятные вещи, которые я мог бы и не…"
+  template: "post.html"
+  icon: ""
+  categories:
+    stories: "Проза"
+  home: false
+  date: "2022-04-20"
+
+- id: operatsiya_spaseniya_izbityy_stsenariy
+  title: "Операция спасения. Избитый сценарий."
+  description: "«Освободим финских рабочих и крестьян от ига помещиков и капиталистов!» С таким лозунгом 30 ноября 1939 года Красная армия начала…"
+  template: "post.html"
+  icon: ""
+  categories:
+    view: "Взгляд"
+  home: false
+  date: "2022-04-15"
+
+- id: mezhdunarodnaya_pomoshch_ili_ustupchivoye_fariseystvo
+  title: "Международная помощь или уступчивое фарисейство"
+  description: "Плеснуть стакан воды в полыхающий дом — тоже помощь при пожаре, не так ли? Но сбегать за полным ведром уж всяко лучше, а еще надежнее…"
+  template: "post.html"
+  icon: ""
+  categories:
+    view: "Взгляд"
+  home: false
+  date: "2022-04-11"
+
+- id: kremlevskiye_besy
+  title: "Кремлевские бесы"
+  description: "Баал — король демонов, правящий на востоке и управляющий более чем 66 легионами адских духов. Именно таков есть нынешний царь России —…"
+  template: "post.html"
+  icon: ""
+  categories:
+    view: "Взгляд"
+  home: false
+  date: "2022-04-04"
+
+- id: bezhenets
+  title: "Беженец"
+  description: "Я похолодел от ужаса, но не я один замер в той комнате. Двери начальника стражи были приоткрыты и призрачный люминесцентный свет…"
+  template: "post.html"
+  icon: ""
+  categories:
+    stories: "Проза"
+  home: false
+  date: "2022-03-19"
+
+- id: umom_rossiyu_ne_ponyat
+  title: "Умом Россию не понять?"
+  description: "Умом Россию не понять? Не бывает плохих народов. Нет ни одного плохого народа. Бывают одурманенные властью правители и их…"
+  template: "post.html"
+  icon: ""
+  categories:
+    view: "Взгляд"
+  home: false
+  date: "2022-03-10"
+
+- id: voyny_nel_zya_izbezhat
+  title: "Войны нельзя избежать"
+  description: "Войны нельзя избежать, ее можно лишь отсрочить — к выгоде вашего противника. Могла ли Британская империя, Франция и их союзники в…"
+  template: "post.html"
+  icon: ""
+  categories:
+    view: "Взгляд"
+  home: false
+  date: "2022-03-07"
+
+- id: osnovnyye_printsipy
+  title: "Основные принципы"
+  description: "Преамбула Радикализация и концептуализация доктрины незыблемых стандартов и правил так и не упрочилась, по естественным причинам, на…"
+  template: "post.html"
+  icon: ""
+  categories:
+    dev: "Dev"
+  home: false
+  date: "2022-02-09"
+
+- id: a_v_parizhe
+  title: "А в Париже..."
+  description: "Перекресток предо мной наполнен живыми фигурами и вычурными каркасами, а старые мшистые коневоды торопятся взять фарватер среди узких…"
+  template: "post.html"
+  icon: ""
+  categories:
+    stories: "Проза"
+  home: false
+  date: "2021-11-28"
+
+- id: mysql_ne_zabud_te_pro_moshchnost
+  title: "MySQL. Не забудьте про мощность."
+  description: "Однажды, с целью оптимизации некоего типового запроса, мы добавили к таблице, содержащей миллионы строк, простой B-tree индекс по…"
+  template: "post.html"
+  icon: ""
+  categories:
+    dev: "Dev"
+  home: false
+  date: "2021-11-12"
+
+- id: grach_na_zadanii
+  title: "Грач на задании"
+  description: "— Опростоволосился, — думал грач, — попал между молотом и наковальней, выдохся, выцвел, заплесневел. История не терпит парадоксов!…"
+  template: "post.html"
+  icon: ""
+  categories:
+    stories: "Проза"
+  home: false
+  date: "2021-10-14"
+
+- id: gnezdit_sya_mne_zdes_uzh_pora
+  title: "гнездиться мне здесь уж пора"
+  description: "Ходуном ходит он по старой кладке, Лес промок от осенних дождей. И уже не играют в прятки Сани, вожжи, да квартет лошадей. Озарились…"
+  template: "post.html"
+  icon: ""
+  categories:
+    poetry: "Поэзия"
+  home: false
+  date: "2021-10-10"
+
+- id: duel
+  title: "Дуэль"
+  description: "Швейцария, 1887 год. Есаул Владилен Федорович де-Сент Шаломонов, прикомандированный к артиллерийскому полку четвертого военного…"
+  template: "post.html"
+  icon: ""
+  categories:
+    stories: "Проза"
+  home: false
+  date: "2021-09-08"
+
+- id: tam_v_norvegii
+  title: "Там, в Норвегии..."
+  description: "Когда автоматический кальцинатор заклинил я обернулся и узрел как сгустки плазмы, чуть затянутые полупрозрачной ситцевой гистограммой,…"
+  template: "post.html"
+  icon: ""
+  categories:
+    stories: "Проза"
+  home: false
+  date: "2021-04-19"
+
+- id: ne_vy_li_graf
+  title: "Не вы ли граф?"
+  description: "Ко мне подошла женщина. — Не вы ли граф? Я опустил голову и посмотрел на туфли. — Не я. У нее не было слов, но она спросила: — Как же…"
+  template: "post.html"
+  icon: ""
+  categories:
+    stories: "Проза"
+  home: false
+  date: "2021-03-17"
+
+- id: kamerdiner
+  title: "Камердинер"
+  description: "Я плакал, когда разверзлись небеса и свежий ливень окропил площадь у древнего обелиска. Обожаю стоять под прохладным летним дождем. А…"
+  template: "post.html"
+  icon: ""
+  categories:
+    stories: "Проза"
+  home: false
+  date: "2021-02-14"
+
+- id: vesna
+  title: "Весна"
+  description: "Утром кобыльим, На причале синем Разгуливает ловелас. Его тени — метели, Отцвели, постарели, И остался трухлявый каркас. Солнце пело…"
+  template: "post.html"
+  icon: ""
+  categories:
+    poetry: "Поэзия"
+  home: false
+  date: "2021-02-07"
+
+- id: razmyshleniya_o_sovremennoy_religii_monoteizm
+  title: "Размышления о современной религии. Монотеизм"
+  description: "Это первая часть из цикла «Размышления о современной религии». В данной серии статей я хочу изложить некоторую интерпретацию моих…"
+  template: "post.html"
+  icon: ""
+  categories:
+    view: "Взгляд"
+  home: false
+  date: "2021-02-07"
+
+- id: ptakh
+  title: "Птах"
+  description: "Церебральная любовь, Свет, оковы, тени, лен, По проспекту, утром ранним, Только бродит почтальон. Заискрилось на болотах Чудо чудное…"
+  template: "post.html"
+  icon: ""
+  categories:
+    poetry: "Поэзия"
+  home: false
+  date: "2021-02-07"
+
+- id: tam_gde_more_molchit
+  title: "Там, где море молчит"
+  description: "«Ты ослушался меня, Патрик. Куда тебя, лихим порывом ветра, затянуло? В какой же шторм ты, по призыву пылких чувств, что жизнь нас в…"
+  template: "post.html"
+  icon: ""
+  categories:
+    stories: "Проза"
+  home: false
+  date: "2021-01-16"
+
+- id: konets_2020
+  title: "Конец 2020"
+  description: "Вот и промчался, столь стремительно, этот безумный год. Последняя остановка и поезд отправляется в депо. Уносит с собой тени прошлого.…"
+  template: "post.html"
+  icon: ""
+  categories:
+    view: "Взгляд"
+  home: false
+  date: "2020-12-31"
+
+- id: yarl_varg
+  title: "Ярл Варг"
+  description: "В древние времена сказывали об одном человеке, который не мог ужиться со своей истинной природой. Он был одержим формой, в которую был…"
+  template: "post.html"
+  icon: ""
+  categories:
+    stories: "Проза"
+  home: false
+  date: "2020-12-11"
+
+- id: dekabr_2020
+  title: "Декабрь 2020"
+  description: "С егодня в цеху было тихо и холодно. Двенадцать человек отсутствовали на местах. По крайней мере, так сказал смотритель. Он был…"
+  template: "post.html"
+  icon: ""
+  categories:
+    view: "Взгляд"
+  home: false
+  date: "2020-12-10"
+
+- id: top_3_samykh_nelepykh_transportnykh_proisshestviya_shvetsii
+  title: "Топ-3 самых нелепых транспортных происшествия Швеции"
+  description: "Как и в других странах, в Швеции, порой, случаются транспортные происшествия. Международная программа Vision Zero, разработанная в…"
+  template: "post.html"
+  icon: ""
+  categories:
+    view: "Взгляд"
+  home: false
+  date: "2020-10-25"
+
+- id: nizlozheniye_lenivogo_lukasha_ili_lovlya_lavrentiya
+  title: "Низложение ленивого Лукаша или ловля Лаврентия"
+  description: "Однажды мы с Колей разбирали старый шкаф в подвале на Пушкинской. Среди кипы бумаг и старых газет мне на глаза попалась старая…"
+  template: "post.html"
+  icon: ""
+  categories:
+    stories: "Проза"
+  home: false
+  date: "2020-10-13"
+
+- id: malyshka_elis
+  title: "Малышка Элис"
+  description: "1-го октября 2020-го года в 23:55 по центральноевропейскому летнему времени у нас родилась дочь - Элис София Блоцкая . В час ее…"
+  template: "post.html"
+  icon: ""
+  categories:
+    view: "Взгляд"
+  home: false
+  date: "2020-10-10"
+
+- id: kto_takaya_elis
+  title: "Кто такая Элис?"
+  description: "стоит сказать, что Элис: - независимая , так как мнение окружающих не превалирует над ее собственным и она способна самостоятельно…"
+  template: "post.html"
+  icon: ""
+  categories:
+    view: "Взгляд"
+  home: false
+  date: "2020-10-10"
+
+- id: dialogs
+  title: "Dialogs"
+  description: "Dave Bowman : Hello, HAL. Do you read me, HAL? HAL : Affirmative, Dave. I read you. Dave Bowman : Open the pod bay doors, HAL. HAL :…"
+  template: "post.html"
+  icon: ""
+  categories:
+    stories: "Проза"
+  home: false
+  date: "2020-10-01"
+
+- id: ispol_zuyem_napisannuyu_na_rust_dinamicheskuyu_biblioteku_v_node_js
+  title: "Используем написанную на Rust динамическую библиотеку в Node.js"
+  description: "Используем Rust динамическую библиотеку в Node.js."
+  template: "post.html"
+  icon: ""
+  categories:
+    dev: "Dev"
+  home: false
+  date: "2020-09-29"
+
+- id: televizor
+  title: "Телевизор"
+  description: "Я бросил бутылку в телевизор, который уже много лет показывал только черно-белый шум и лишь иногда, глубокой ночью, в нем появлялись…"
+  template: "post.html"
+  icon: ""
+  categories:
+    stories: "Проза"
+  home: false
+  date: "2020-07-10"
+
+- id: pompei
+  title: "Помпеи"
+  description: "Карабкаясь по куче пемзы, Я из Помпей бежал сюда, Под Геркуланумом я спекся И пепел в рот попал свистя. Я запекался в акведуках,…"
+  template: "post.html"
+  icon: ""
+  categories:
+    poetry: "Поэзия"
+  home: false
+  date: "2020-07-10"
+
+- id: na_rabote
+  title: "На работе"
+  description: "Ко мне подошел человек. - Коллега! Двести лет мы сидели рядом и ни разу не обмолвились и словом. А теперь я вынужден покинуть эту…"
+  template: "post.html"
+  icon: ""
+  categories:
+    stories: "Проза"
+  home: false
+  date: "2020-07-10"
+
+- id: dumat_i_prikladyvat
+  title: "Думать и прикладывать"
+  description: "Мы стали чуть сильнее, хотя бы морально, чуть ответственнее. Где-то там, на кромке сознания, появился ядовитый привкус отрешенности. И…"
+  template: "post.html"
+  icon: ""
+  categories:
+    view: "Взгляд"
+  home: false
+  date: "2020-07-10"
+
+- id: a_tam_yeshche_khuzhe
+  title: "А там еще хуже"
+  description: "Так просто захотелось пойти на завод утром и совсем забыл, что его закрыли из-за какого-то карантина. И стало неясно что делать. Нет…"
+  template: "post.html"
+  icon: ""
+  categories:
+    stories: "Проза"
+  home: false
+  date: "2020-07-10"
+
+- id: zhenshchina_svirel
+  title: "Женщина-свирель!"
+  description: "Автор Жератино 29.10.2007 г. О Женщина-свирель, Ты так красива! Гуляли мы с тобой В аллеях и садах, Ты на курган меня манила, Танцуя…"
+  template: "post.html"
+  icon: ""
+  categories:
+    poetry: "Поэзия"
+  home: false
+  date: "2020-07-04"
+
+- id: rozhdeniye
+  title: "Рождение"
+  description: "На эскалаторе стояли двое. Их смутные силуэты скользили вниз к свету мерцающей лампы. Я лишь украдкой нащупал ступени, они были…"
+  template: "post.html"
+  icon: ""
+  categories:
+    stories: "Проза"
+  home: false
+  date: "2020-07-03"
+
+- id: pryamougol_nik
+  title: "Прямоугольник"
+  description: "Выйдя из подъезда и свернув не то вправо, не то влево, я остался сидеть дома. Ветер и морось гуляли под свинцовым куполом небосвода.…"
+  template: "post.html"
+  icon: ""
+  categories:
+    stories: "Проза"
+  home: false
+  date: "2020-06-25"
+
+- id: adyul_ter
+  title: "Адюльтер"
+  description: "В тесно обставленной комнате сидели трое: женщина лет тридцати и двое мужчин, один из которых, казалось, пребывал в атараксии, а…"
+  template: "post.html"
+  icon: ""
+  categories:
+    stories: "Проза"
+  home: false
+  date: "2020-06-01"
+
+- id: anizotropnyye_chudo_ot_stranennogo_razuma_kotoryy_ne_mozhet_bezdeystvovat_i_poro
+  title: "Анизотропные: чудо отстраненного разума, который не может бездействовать и порождает циклопический и эклектический гештальт"
+  description: "Когда темные струистые облака взорвались под закатной вспышкой, ноги уже отказывались идти и боль в спине подступала к краю…"
+  template: "post.html"
+  icon: ""
+  categories:
+    stories: "Проза"
+  home: false
+  date: "2020-05-23"
+
+- id: bezvestnyy
+  title: "Безвестный"
+  description: "Так просто захотелось пойти на завод утром и совсем забыл, что его закрыли из-за какого-то карантина. И стало неясно что делать. Нет…"
+  template: "post.html"
+  icon: ""
+  categories:
+    stories: "Проза"
+  home: false
+  date: "2020-05-18"
+
+- id: spivomovka
+  title: "Співомовка"
+  description: "Такий жанр як \"співомовка\" міг би стати актуальним за часів розвиненого широкосмугового доступу. Це лаконічний сатиричний віршований…"
+  template: "post.html"
+  icon: ""
+  categories:
+    view: "Взгляд"
+  home: false
+  date: "2020-05-16"
+
+- id: mysql_optimizatsiya_zaprosa_s_kovarnym_operatorom_or
+  title: "MySQL оптимизация запроса с коварным оператором OR"
+  description: "Недавно я столкнулся с проблемой медленного выполнения довольно простого запроса в MySQL. Анализ и поиск оптимизации привел меня к…"
+  template: "post.html"
+  icon: ""
+  categories:
+    dev: "Dev"
+  home: false
+  date: "2020-05-09"
+
+- id: otchet_yevropeyskoy_komissii_ob_innovatsionnoy_deyatel_nosti_2019
+  title: "Отчет Европейской комиссии об инновационной деятельности 2019"
+  description: "Ежегодный отчет Европейской комиссии об инновационной деятельности (EIS) дает сравнительную оценку результатов исследований инноваций…"
+  template: "post.html"
+  icon: ""
+  categories:
+    view: "Взгляд"
+  home: false
+  date: "2020-05-08"
+
+- id: burnoye_proshloye_primorskoy_derevushki_melle
+  title: "Бурное прошлое приморской деревушки Мёлле"
+  description: "Если из Хельсинборга отправиться на север и достичь шоссе № 111, то дорога, в конечном счете, приведет вас в небольшую прибрежную…"
+  template: "post.html"
+  icon: ""
+  categories:
+    view: "Взгляд"
+  home: false
+  date: "2020-03-21"
+
+- id: iz_istorii_o_zarozhdenii_turizma_v_shvetsii
+  title: "Из истории о зарождении туризма в Швеции"
+  description: "В Швеции спа-туризм начал развиваться с XVII века. На тот момент только привилегированный класс мог позволить себе отдых и путешествия…"
+  template: "post.html"
+  icon: ""
+  categories:
+    view: "Взгляд"
+  home: false
+  date: "2020-03-20"
+
+- id: kak_skompilirovat_rust_programmu_v_macos_dlya_windows
+  title: "Как скомпилировать Rust программу в MacOS для Windows"
+  description: "Однажды мне понадобилось скомпилировать исходный код Rust в .exe-исполняемый файл. Программа разрабатывалась на MacOS и в конечном…"
+  template: "post.html"
+  icon: ""
+  categories:
+    dev: "Dev"
+  home: false
+  date: "2020-02-09"
+
+- id: ob_idempotentnosti_funktsii
+  title: "Об идемпотентности функции"
+  description: "В этом материале мы, в качестве одного из фундаментальных требований к построению современных облачных функций, рассмотрим понятие…"
+  template: "post.html"
+  icon: ""
+  categories:
+    dev: "Dev"
+  home: false
+  date: "2020-02-03"
+
+- id: nekotoryye_osobennosti_google_cloud_funktsiy
+  title: "Некоторые особенности Google Cloud функций"
+  description: "Материал представляет собой адаптированный перевод выдержек из документации Google Cloud Functions, которые стоит принимать во…"
+  template: "post.html"
+  icon: ""
+  categories:
+    dev: "Dev"
+  home: false
+  date: "2020-02-03"
+
+- id: nesootvet_stviye
+  title: "Несоответствие"
+  description: "Странно, и в некоторой степени неприятно слышать, когда люди с досадой, презрением или негодованием отзываются о своей работе а…"
+  template: "post.html"
+  icon: ""
+  categories:
+    view: "Взгляд"
+  home: false
+  date: "2020-01-26"
+
+- id: zapozdalyye_pozdravleniya
+  title: "Запоздалые поздравления"
+  description: "1. Уважаемый господин Крюгер! Слезно прошу меня простить за то, что не успел поздравить вас вовремя. Вчера, в день, которого я с таким…"
+  template: "post.html"
+  icon: ""
+  categories:
+    stories: "Проза"
+  home: false
+  date: "2013-09-28"
+
+- id: i_vot_ya_pered_ney_ch_1
+  title: "И вот я перед ней... ч.1"
+  description: "И вот я перед ней, наши руки тянуться друг к другу, словно континенты. Непонятно только, как все это могло получится? Но когда здравый…"
+  template: "post.html"
+  icon: ""
+  categories:
+    stories: "Проза"
+  home: false
+  date: "2013-08-30"
+
+- id: rasskaz_104
+  title: "Рассказ 104"
+  description: "Очень мрачно. На желтеющей остановке стоял человек с небритым лицом в толстой кожаной куртке, держа в правой руке кусок большой…"
+  template: "post.html"
+  icon: ""
+  categories:
+    stories: "Проза"
+  home: false
+  date: "2012-07-11"
+
+- id: puteshestviye_den_22
+  title: "Путешествие день 22"
+  description: "Я встретил пастуха в толстенной овечьей шкуре, несущего за спиной набитый доверху мешок, с которого капал ярко-зеленый сок. Его…"
+  template: "post.html"
+  icon: ""
+  categories:
+    stories: "Проза"
+  home: false
+  date: "2012-06-29"
+
+- id: yedinstvennaya_zapis_v_dnevnike_odnogo_cheloveka
+  title: "Единственная запись в дневнике одного человека"
+  description: "Никогда еще мне не было так одиноко, и никогда туман не был таким дерзким, скрывая в голубой дымке мрачные стены замка. Да, замка - я…"
+  template: "post.html"
+  icon: ""
+  categories:
+    stories: "Проза"
+  home: false
+  date: "2012-06-27"
+
+- id: obshchestvo_nashego_doma
+  title: "Общество нашего дома"
+  description: "Наша соседка ничем не отличается от любой другой, за исключением, пожалуй, ее сходства с собакой. Всем нам она напоминает животное…"
+  template: "post.html"
+  icon: ""
+  categories:
+    stories: "Проза"
+  home: false
+  date: "2012-06-26"
+
+- id: opravdaniye
+  title: "Оправдание"
+  description: "Легкая тропинка тянулась сквозь играющие лучики света. Сначала она была ровная, текла в тенистой зеленой галерее, а затем, извиваясь…"
+  template: "post.html"
+  icon: ""
+  categories:
+    stories: "Проза"
+  home: false
+  date: "2012-03-22"
+
+- id: navernoye_samyy_opasnyy_zver_vo_vselennoy_istoriya_chervudelya_kak_ona_yest
+  title: "Наверное, самый опасный зверь во вселенной! История Червуделя, как она есть..."
+  description: "Из архива jeratihno.com.ua (02.10.2007 г.) История червуделя берет свое начало из древней Иордании и Пакистана. Здесь на краю…"
+  template: "post.html"
+  icon: ""
+  categories:
+    stories: "Проза"
+  home: false
+  date: "2007-10-02"
+
 - id: about
   title: "Об авторе"
   description: "Немного обо мне и моих проектах"

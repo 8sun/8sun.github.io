@@ -1,2 +1,4 @@
 .idea
 static-site-gen
+migration
+resources/draft
