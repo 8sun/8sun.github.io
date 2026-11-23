@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Как скомпилировать Rust программу в MacOS для Windows | Бодхисаттва в сети</title>
+    <meta name="description" content="Однажды мне понадобилось скомпилировать исходный код Rust в .exe-исполняемый файл. Программа разрабатывалась на MacOS и в конечном…">
+    <link rel="canonical" href="https://8sun.github.io/kak_skompilirovat_rust_programmu_v_macos_dlya_windows.html">
+    <meta property="og:title" content="Как скомпилировать Rust программу в MacOS для Windows">
+    <meta property="og:description" content="Однажды мне понадобилось скомпилировать исходный код Rust в .exe-исполняемый файл. Программа разрабатывалась на MacOS и в конечном…">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Бодхисаттва в сети">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://8sun.github.io/assets/img/no-image.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Как скомпилировать Rust программу в MacOS для Windows">
+    <meta name="twitter:description" content="Однажды мне понадобилось скомпилировать исходный код Rust в .exe-исполняемый файл. Программа разрабатывалась на MacOS и в конечном…">
+    <meta name="twitter:image" content="https://8sun.github.io/assets/img/no-image.png">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+</head>
+<body>
+<header class="top-banner">
+    <p><a href="https://github.com/8sun/static-site-gen">[Powered by 8sun]</a></p>
+</header>
+<header class="main-header page-header">
+    <div class="logo">
+        <h1>Как скомпилировать Rust программу в MacOS для Windows</h1>
+        <p>Однажды мне понадобилось скомпилировать исходный код Rust в .exe-исполняемый файл. Программа разрабатывалась на MacOS и в конечном…</p>
+    </div>
+    <nav>
+        <a class="meny_item" href="index.html">Дом</a><a class="meny_item" href="dev.html">Dev</a><a class="meny_item" href="view.html">Взгляд</a><a class="meny_item" href="poetry.html">Поэзия</a><a class="meny_item" href="stories.html">Проза</a>
+    </nav>
+</header>
+<main>
+    <section class="intro">
+        <p>Однажды мне понадобилось скомпилировать исходный код Rust в .exe-исполняемый файл. Программа разрабатывалась на MacOS и в конечном итоге достигла своего логического завершения. Однако некоторое время спустя появилось новое техническое требование - скомпилировать программу для Windows x86_64.<br />
+<a href="https://gist.github.com/Mefistophell/9787e1b6d2d9441c16d2ac79d6a505e6">Решение</a></p>
+<p>Было бы проще, вероятно, собрать программу на Windows, однако такой путь несопоставим с эволюцией программирования; нам следует решать проблему, а не искать обходные пути.</p>
+<h3>Описание</h3>
+<p><strong>Шаг 1</strong><br />
+Чтобы скомпилировать исходный код для платформы отличной от той, на которой вы разрабатываете программу необходимо задать опцию <strong>target</strong>.</p>
+<p>Команда <code>&gt; rustup target list</code> выводит список всех доступных значений для этой опции.</p>
+<p>Задать <strong>target</strong> можно при запуске компилятора, а можно используя файл конфигурации. [<a href="https://doc.rust-lang.org/cargo/reference/config.html">Подробно про конфигурацию</a>]</p>
+<p>В нашем случае предполагается, что файл конфигурации находится в <code>.cargo/config</code> относительно корня проекта. Для компиляции под Windows x86_64 мы должны указать следующие инструкции:</p>
+<pre><code>[target.x86_64-pc-windows-gnu]
+ linker = &quot;x86_64-w64-mingw32-gcc&quot;
+</code></pre>
+<p>Теперь нам необходим этот самый <code>86_64-pc-windows-gnu</code><br />
+Это так называемый GNU Compiler Collection — набор компиляторов для различных языков программирования. Нам следует установить его в систему, а затем добавить в <strong>Rust toolchain.</strong></p>
+<blockquote>
+<p><em>Toolchain - это набор связанных инструментов необходимых для компиляции и генерации выполняемого кода из исходных текстов.</em></p>
+</blockquote>
+<p>Так же мы должны указать компоновщик - <code>linker</code></p>
+<p>Компилятор <strong>Rust</strong> последовательно просматривает каждый файл исходного кода и проверяет его на соответствие правилам языка <strong>Rust.</strong> Затем он преобразовывает исходный код в файл машинного языка, называемый объектным файлом.</p>
+<p>После того, как компилятор создает один или несколько объектных файлов, другая программа, называемая <strong>компоновщиком</strong>, берет все объектные файлы, сгенерированные компилятором, и объединяет их в одну исполняемую программу. Помимо возможности связывать объектные файлы, компоновщик также может связывать файлы библиотек. Файл библиотеки представляет собой набор предварительно скомпилированного кода, который был «упакован» для повторного использования в других программах.</p>
+<p><strong>Шаг 2</strong><br />
+Самое время установить соответствующий GCC, коллекцию компиляторов GNU для Windows. Как этот <a href="https://formulae.brew.sh/formula/mingw-w64">Mingw-W64</a>.</p>
+<p>Я буду устанавливать через <strong>Homebrew.</strong><br />
+<code>&gt; brew install mingw-w64</code></p>
+<p><strong>Шаг 3</strong><br />
+Теперь можно добавить <strong>target</strong> в <strong>toolchain</strong>.<br />
+<code>&gt; rustup target add x86_64-pc-windows-gnu</code></p>
+<p>Все готово, можно пробовать запустить компиляцию:<br />
+<code>&gt; cargo build --target=x86_64-pc-windows-gnu --verbose</code></p>
+<p>Troubleshooting!<br />
+Если компиляция не удалась, как это было у меня из-за всевозможных попыток выработать решение, то можно попробовать следующее:</p>
+<pre><code>&gt; cp -f /usr/local/Cellar/mingw-w64/7.0.0_1/toolchain-x86_64/x86_64-w64-mingw32/lib/{,dll}crt2.o `rustc --print sysroot`/lib/rustlib/x86_64-pc-windows-gnu/lib
+</code></pre>
+<p>Ссылки:</p>
+<ul>
+<li><a href="https://gist.github.com/Mefistophell/9787e1b6d2d9441c16d2ac79d6a505e6">Оригинал решения на английском</a></li>
+<li><a href="https://formulae.brew.sh/formula/mingw-w64">Download mingw-w64 via Homebrew</a></li>
+<li><a href="https://doc.rust-lang.org/cargo/reference/config.html">Cargo configuration</a></li>
+<li><a href="https://www.learncpp.com/cpp-tutorial/introduction-to-the-compiler-linker-and-libraries/">Introduction to the compiler, linker, and libraries</a></li>
+<li><a href="https://github.com/rust-lang/rust/issues/32859">Github issue: Can’t cross compile from Linux to Windows</a></li>
+<li><a href="https://github.com/rust-lang/rust/issues/47048">Github issue: Cannot link with C code using stdout</a></li>
+<li><a href="https://medium.com/@nsdchrisu/rust-is-distributed-on-a-stable-nightly-and-beta-release-channels-5ebf18126c0d">Rust Toolchains</a></li>
+</ul>
+
+        <p class="footer-note">Разделы: <a href="dev.html" class="category-link">Dev</a></p>
+        <p class="footer-note">2020-02-09</p>
+        <div class="buttons">
+            <a href="./contact.html" class="button primary">Написать мне</a>
+            <a href="./about.html" class="button secondary">Об авторе</a>
+        </div>
+    </section>
+</main>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Как скомпилировать Rust программу в MacOS для Windows","description":"Однажды мне понадобилось скомпилировать исходный код Rust в .exe-исполняемый файл. Программа разрабатывалась на MacOS и в конечном…","datePublished":"2020-02-09","mainEntityOfPage":"https://8sun.github.io/kak_skompilirovat_rust_programmu_v_macos_dlya_windows.html","author":{"@type":"Person","name":"Бодхисаттва в сети"}}</script>
+<script src="./assets/js/highlight-category.js"></script>
+</body>
+</html>

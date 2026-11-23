@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MySQL оптимизация запроса с коварным оператором OR | Бодхисаттва в сети</title>
+    <meta name="description" content="Недавно я столкнулся с проблемой медленного выполнения довольно простого запроса в MySQL. Анализ и поиск оптимизации привел меня к…">
+    <link rel="canonical" href="https://8sun.github.io/mysql_optimizatsiya_zaprosa_s_kovarnym_operatorom_or.html">
+    <meta property="og:title" content="MySQL оптимизация запроса с коварным оператором OR">
+    <meta property="og:description" content="Недавно я столкнулся с проблемой медленного выполнения довольно простого запроса в MySQL. Анализ и поиск оптимизации привел меня к…">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Бодхисаттва в сети">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://8sun.github.io/assets/img/no-image.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MySQL оптимизация запроса с коварным оператором OR">
+    <meta name="twitter:description" content="Недавно я столкнулся с проблемой медленного выполнения довольно простого запроса в MySQL. Анализ и поиск оптимизации привел меня к…">
+    <meta name="twitter:image" content="https://8sun.github.io/assets/img/no-image.png">
+    <link rel="stylesheet" href="./assets/css/styles.css">
+</head>
+<body>
+<header class="top-banner">
+    <p><a href="https://github.com/8sun/static-site-gen">[Powered by 8sun]</a></p>
+</header>
+<header class="main-header page-header">
+    <div class="logo">
+        <h1>MySQL оптимизация запроса с коварным оператором OR</h1>
+        <p>Недавно я столкнулся с проблемой медленного выполнения довольно простого запроса в MySQL. Анализ и поиск оптимизации привел меня к…</p>
+    </div>
+    <nav>
+        <a class="meny_item" href="index.html">Дом</a><a class="meny_item" href="dev.html">Dev</a><a class="meny_item" href="view.html">Взгляд</a><a class="meny_item" href="poetry.html">Поэзия</a><a class="meny_item" href="stories.html">Проза</a>
+    </nav>
+</header>
+<main>
+    <section class="intro">
+        <p>Недавно я столкнулся с проблемой медленного выполнения довольно простого запроса в MySQL. Анализ и поиск оптимизации привел меня к неожиданному решению. Верно, где-то я пропустил этот урок. Тем не менее, вот он ответ, прямо по тексту.<br />
+*<em>*</em></p>
+<p><strong>Проблема</strong>: запрос выполняется чрезвычайно медленно, несмотря на кажущуюся иллюзорность оптимизации на индексах.</p>
+<p><strong>Решение</strong>: как говаривал старина Эйнштейн, правильно сформулированный вопрос - есть большая часть решения проблемы.</p>
+<p><strong>Объединение двух таблиц с условием по индексным полям в связке с оператором</strong> <strong>OR</strong></p>
+<p>Рассмотрим следующий запрос:</p>
+<pre><code>select c.id, s.gender from customer c
+ left join subscription s on s.email = c.email
+ where s.modified between '2020-04-30 15:00:00' and '2020-04-30 16:00:00'
+ or c.modified between '2020-04-30 15:00:00' and '2020-04-30 16:00:00'
+ group by c.id
+ order by c.id DESC;
+</code></pre>
+<p>фрагмент 1</p>
+<p>С точки зрения декларативного стиля такой запрос выглядит весьма логично, нас интересуют данные из двух таблиц за один и тот же промежуток времени. Сразу хочу сказать, что здесь мы имеем индексы по полям <strong>email</strong>, <strong>modified</strong> для обеих таблиц.</p>
+<p>Казалось бы, отобрал строки по индексу <strong>modified</strong> из обеих таблиц и свел по ключу (eq_ref). Делов-то! Но, увы, это так не работает. Выполняется полное сканирование одной таблицы для каждой комбинации строк из другой (ALL). Почему? Хороший вопрос.</p>
+<p>В индексах нет никакого смысла, поскольку для того, чтобы соединить строки нужно проделать полное сканирование. Нельзя отобрать данные по какому-либо из индексов из одной таблицы и соединить с другой - так как вы рискуете потерять данные из второй таблицы (и вообще это совсем меняет условие).</p>
+<p>Как же быть? С помощью потусторонних сил я вызвал в памяти образ Декарта и воспроизвел мне явленное - оператор <strong>UNION.</strong></p>
+<p>Его недостаток в том, что он проделывает дополнительную работу по устранению дубликатов (к счастью только на результирующих строках), однако он позволяет оптимизатору запросов использовать индексы в обеих таблицах.</p>
+<p>Вот как стал выглядеть оптимизированный запрос:</p>
+<pre><code>select id, gender from (
+   select c.id, s.gender from customer c
+   left join subscription s on s.email = c.email
+   where s.modified between '2020-04-30 15:00:00' and '2020-04-30 16:00:00'
+   union
+   select c.id, s.gender from customer c
+   left join subscription s on s.email = c.email
+   where c.modified between '2020-04-30 15:00:00' and '2020-04-30') as t
+ group by t.id
+ order by t.id DESC;
+</code></pre>
+<p>фрагмент 2</p>
+<p>Несколько многословно, зато скорость впечатляющая! При таком подходе происходит отбор данных по индексу сначала из одной соединенной таблицы, а затем к результату добавляются отобранные по индексу строки из другой соединенной таблицы. И это работает гораздо быстрее.</p>
+<p>Ниже приведены результаты анализа запроса (EXPLAIN). Сверху вниз: неоптимизированный запрос из <em>фрагмента 1</em>; тот же запрос без <strong>group by</strong> и <strong>order by</strong> и оптимизированный запрос из <em>фрагмента 2.</em></p>
+<p><a href="assets/img/blogger/filtered2.png"><img src="assets/img/blogger/filtered2.png" alt="" /></a></p>
+<p><strong>Бонус:</strong></p>
+<p>Запрос без <strong>group by</strong> и <strong>order by</strong> дает нам более ясное представление о методике выполнения запроса, а именно - показывает, что нет никакого индекса и нужно прочесывать всю таблицу.</p>
+<p>Больше всего в глаза бросается тип соединения и количество строк. Это важнейшие показатели, на которые прежде всего обращают внимание при анализе эффективности запроса.</p>
+<p>Ссылки:</p>
+<p><a href="https://www.oreilly.com/library/view/high-performance-mysql/9780596101718/ch04.html">Query Performance Optimization</a></p>
+<p><a href="https://dev.mysql.com/doc/refman/8.0/en/explain-output.html#jointype_eq_ref">EXPLAIN Output Format</a></p>
+<p><a href="https://stackoverflow.com/questions/13750475/sql-performance-union-vs-or">Stackoverflow - Union vs OR</a>\</p>
+
+        <p class="footer-note">Разделы: <a href="dev.html" class="category-link">Dev</a></p>
+        <p class="footer-note">2020-05-09</p>
+        <div class="buttons">
+            <a href="./contact.html" class="button primary">Написать мне</a>
+            <a href="./about.html" class="button secondary">Об авторе</a>
+        </div>
+    </section>
+</main>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"MySQL оптимизация запроса с коварным оператором OR","description":"Недавно я столкнулся с проблемой медленного выполнения довольно простого запроса в MySQL. Анализ и поиск оптимизации привел меня к…","datePublished":"2020-05-09","mainEntityOfPage":"https://8sun.github.io/mysql_optimizatsiya_zaprosa_s_kovarnym_operatorom_or.html","author":{"@type":"Person","name":"Бодхисаттва в сети"}}</script>
+<script src="./assets/js/highlight-category.js"></script>
+</body>
+</html>
